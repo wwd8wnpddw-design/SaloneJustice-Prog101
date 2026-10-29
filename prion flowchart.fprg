@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.6">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="Major BANGURA"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2026-10-29 04:12:30 PM"/>
+        <attribute name="created" value="TWFqb3IgQkFOR1VSQTsgREVTS1RPUC1FNjgyVEVGOyAyMDI2LTEwLTExOyAxMTo0OToyMSBQTTsgMzQ1NQ=="/>
+        <attribute name="edited" value="TWFqb3IgQkFOR1VSQTsgREVTS1RPUC1FNjgyVEVGOyAyMDI2LTEwLTI5OyAwNDoxMjozMCBQTTsgMzQ1Ng=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="Fullname" type="String" array="False" size=""/>
+            <declare name="Offensecategory" type="String" array="False" size=""/>
+            <declare name="Courtdate" type="String" array="False" size=""/>
+            <declare name="Medicalcheck" type="String" array="False" size=""/>
+            <declare name="age" type="Integer" array="False" size=""/>
+            <declare name="InmateID" type="String" array="False" size=""/>
+            <declare name="Assignedcell" type="Integer" array="False" size=""/>
+            <output expression="&quot;Enter Inmate full legal name&quot;"/>
+            <input variable="Fullname"/>
+            <output expression="&quot;Enter Inmate age&quot;"/>
+            <input variable="age"/>
+            <output expression="&quot;Enter Offense category&quot;"/>
+            <input variable="Offensecategory"/>
+            <output expression="&quot;enter next court date (DD-MM-YYYY)&quot;"/>
+            <input variable="Courtdate"/>
+            <output expression="&quot;Enter cell unit (1-10)&quot;"/>
+            <input variable="Assignedcell"/>
+            <output expression="&quot;medical check up?? (yes\no)&quot;"/>
+            <input variable="Medicalcheck"/>
+            <while expression="age &lt; 18 or len(Fullname) == 0">
+                <output expression="&quot;Error: age must be 18+ or blank name. please re enter your name and age respectively&quot;"/>
+                <input variable="Fullname"/>
+                <input variable="age"/>
+            </while>
+            <assign variable="InmateID" expression="Generateid(Fullname, age)"/>
+            <if expression="Assignedcell &gt; 10 or Assignedcell &lt; 1">
+                <then>
+                    <output expression="&quot;Invalid cell. Reassigned to unit 1&quot;"/>
+                    <assign variable="Assignedcell" expression="1"/>
+                </then>
+                <else>
+                    <output expression="&quot;cell confirmed&quot;"/>
+                </else>
+            </if>
+            <if expression="Medicalcheck == &quot;yes&quot;">
+                <then>
+                    <output expression="&quot;route to medical unit&quot;"/>
+                </then>
+                <else>
+                    <output expression="&quot;cleared for standard block entry&quot;"/>
+                </else>
+            </if>
+            <output expression="&quot;Tracking ID: &quot; &amp; InmateID &amp; &quot; | Name: &quot; &amp; Fullname &amp; &quot; | Offense: &quot; &amp; Offensecategory &amp; &quot; | Court Date: &quot; &amp; Courtdate &amp; &quot; | Cell Unit: &quot; &amp; Assignedcell"/>
+        </body>
+    </function>
+    <function name="GenerateID" type="String" variable="result">
+        <parameters>
+            <parameter name="name" type="String" array="False"/>
+            <parameter name="Inmateage" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="result" type="String" array="False" size=""/>
+            <assign variable="result" expression="&quot;SLCS-&quot; &amp; name &amp; &quot;-&quot; &amp; Inmateage"/>
+        </body>
+    </function>
+</flowgorithm>
